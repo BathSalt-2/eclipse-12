@@ -4,9 +4,10 @@ import { ArrowRight, Play, Brain, Network, Sparkles } from 'lucide-react';
 
 interface HeroSectionProps {
   onEnterDashboard: () => void;
+  onEnterChat: () => void;
 }
 
-const HeroSection = ({ onEnterDashboard }: HeroSectionProps) => {
+const HeroSection = ({ onEnterDashboard, onEnterChat }: HeroSectionProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -96,12 +97,13 @@ const HeroSection = ({ onEnterDashboard }: HeroSectionProps) => {
             </Button>
             
             <Button
+              onClick={onEnterChat}
               variant="outline"
               className="btn-neural text-lg"
               size="lg"
             >
-              <Play className="w-5 h-5 mr-2" />
-              Watch Demo
+              <Brain className="w-5 h-5 mr-2" />
+              Begin Dialog
             </Button>
           </div>
 

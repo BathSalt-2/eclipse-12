@@ -21,9 +21,10 @@ import {
 
 interface DashboardProps {
   onBackToLanding: () => void;
+  onEnterChat: () => void;
 }
 
-const Dashboard = ({ onBackToLanding }: DashboardProps) => {
+const Dashboard = ({ onBackToLanding, onEnterChat }: DashboardProps) => {
   const [activeEchoNodes] = useState(147);
   const [globalSentience] = useState(73);
   const [intentSynth] = useState(89);
@@ -53,6 +54,15 @@ const Dashboard = ({ onBackToLanding }: DashboardProps) => {
               </h1>
             </div>
             <div className="flex items-center gap-3">
+              <Button
+                onClick={onEnterChat}
+                variant="outline"
+                size="sm"
+                className="border-primary/30 text-primary hover:bg-primary/10"
+              >
+                <Brain className="w-4 h-4 mr-2" />
+                Begin Dialog
+              </Button>
               <Badge variant="outline" className="border-primary/30 text-primary">
                 <Activity className="w-3 h-3 mr-1" />
                 Live
