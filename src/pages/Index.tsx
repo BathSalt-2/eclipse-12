@@ -1,12 +1,38 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import LoadingScreen from '@/components/LoadingScreen';
+import HeroSection from '@/components/HeroSection';
+import Dashboard from '@/components/Dashboard';
+
+type AppState = 'loading' | 'landing' | 'dashboard';
 
 const Index = () => {
+  const [currentState, setCurrentState] = useState<AppState>('loading');
+
+  const handleLoadingComplete = () => {
+    setCurrentState('landing');
+  };
+
+  const handleEnterDashboard = () => {
+    setCurrentState('dashboard');
+  };
+
+  const handleBackToLanding = () => {
+    setCurrentState('landing');
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen font-exo">
+      {currentState === 'loading' && (
+        <LoadingScreen onComplete={handleLoadingComplete} />
+      )}
+      
+      {currentState === 'landing' && (
+        <HeroSection onEnterDashboard={handleEnterDashboard} />
+      )}
+      
+      {currentState === 'dashboard' && (
+        <Dashboard onBackToLanding={handleBackToLanding} />
+      )}
     </div>
   );
 };

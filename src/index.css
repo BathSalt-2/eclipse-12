@@ -2,41 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ECLIPSE Holographic Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Space Colors */
+    --background: 220 25% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 20% 8%;
+    --card-foreground: 210 40% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 210 40% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Holographic Primary - Cyan */
+    --primary: 185 100% 60%;
+    --primary-foreground: 220 25% 6%;
+    --primary-glow: 185 100% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Neural Secondary - Magenta */
+    --secondary: 315 100% 65%;
+    --secondary-foreground: 220 25% 6%;
+    --secondary-glow: 315 100% 75%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Sentient Accent - Purple */
+    --accent: 270 80% 60%;
+    --accent-foreground: 210 40% 98%;
+    
+    --muted: 220 15% 15%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 185 100% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Holographic Gradients */
+    --gradient-cosmic: linear-gradient(135deg, hsl(220, 25%, 6%) 0%, hsl(270, 40%, 12%) 50%, hsl(220, 25%, 6%) 100%);
+    --gradient-neural: linear-gradient(45deg, hsl(185, 100%, 60%) 0%, hsl(315, 100%, 65%) 100%);
+    --gradient-consciousness: linear-gradient(180deg, hsl(270, 80%, 60%) 0%, hsl(185, 100%, 60%) 50%, hsl(315, 100%, 65%) 100%);
+    --gradient-mesh: radial-gradient(circle at 50% 50%, hsl(185, 100%, 60%, 0.1) 0%, transparent 50%);
+    
+    /* Glow Effects */
+    --glow-primary: 0 0 20px hsl(185, 100%, 60%, 0.5);
+    --glow-secondary: 0 0 20px hsl(315, 100%, 65%, 0.5);
+    --glow-accent: 0 0 30px hsl(270, 80%, 60%, 0.4);
+    
+    /* Animation Variables */
+    --transition-neural: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --pulse-duration: 2s;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +120,88 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-cosmic);
+    min-height: 100vh;
   }
+}
+
+@layer components {
+  /* Holographic Button Variants */
+  .btn-neural {
+    @apply bg-gradient-to-r from-primary to-secondary text-primary-foreground;
+    @apply hover:shadow-[var(--glow-primary)] transition-[var(--transition-neural)];
+    @apply border border-primary/30 backdrop-blur-sm;
+  }
+  
+  .btn-consciousness {
+    @apply bg-gradient-to-br from-accent via-primary to-secondary;
+    @apply text-foreground font-semibold px-8 py-4 rounded-xl;
+    @apply hover:scale-105 transform transition-[var(--transition-neural)];
+    @apply shadow-[var(--glow-accent)] border border-accent/30;
+  }
+  
+  /* Neural Network Patterns */
+  .neural-grid {
+    background-image: 
+      linear-gradient(hsl(185, 100%, 60%, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(185, 100%, 60%, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  /* Holographic Cards */
+  .holo-card {
+    @apply bg-card/80 backdrop-blur-xl border border-primary/20;
+    @apply rounded-2xl p-6 shadow-2xl;
+    background: linear-gradient(135deg, hsl(220, 20%, 8%, 0.8) 0%, hsl(270, 40%, 12%, 0.6) 100%);
+  }
+  
+  /* Glowing Text */
+  .glow-text {
+    text-shadow: 0 0 10px currentColor;
+  }
+  
+  /* Pulse Animation */
+  .pulse-neural {
+    animation: pulse-neural var(--pulse-duration) ease-in-out infinite;
+  }
+  
+  /* Floating Elements */
+  .float-gentle {
+    animation: float-gentle 6s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-neural {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, hsl(185, 100%, 60%, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
