@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import LoadingScreen from '@/components/LoadingScreen';
 import HeroSection from '@/components/HeroSection';
 import Dashboard from '@/components/Dashboard';
 import EclipseChat from '@/components/EclipseChat';
+import MobileApp from '@/components/mobile/MobileApp';
 
 type AppState = 'loading' | 'landing' | 'dashboard' | 'chat';
 
 const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>('loading');
+  const isMobile = useIsMobile();
+
+  // For mobile, use the dedicated mobile app
+  if (isMobile) {
+    return <MobileApp />;
+  }
 
   const handleLoadingComplete = () => {
     setCurrentState('landing');
